@@ -14,7 +14,7 @@ class Movie(models.Model):
 
 
 class Review(models.Model):
-    user = models.ManyToManyField(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     rating = models.IntegerField()
     description = models.TextField()
