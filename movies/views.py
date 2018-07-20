@@ -31,15 +31,23 @@ def createReview(request,movie_id):
 
 
 def showMovie(request,movie_id):
+	movie = Movie.objects.get(pk=movie_id)
 	if request.method == "POST":
 		createReview(request,movie_id)
-	movie = Movie.objects.get(pk=movie_id)
 	movie_topics = Topic.objects.filter(movie=movie)
 	movie_reviews = Review.objects.filter(movie=movie)
+	if len(movie_reviews) > 3:
+		latest_movie_reviews = movie_reviews[:3]
+	else:
+		latest_movie_reviews = movie_reviews
+	if len(movie_topics) > 3:
+		latest_movie_topics = movie_topics[:3]
+	else:
+		latest_movie_topics = movie_topics
 	form = ReviewForm()
 	return render(request,"movies/showMovie.html",{
 		"movie":movie,
-		"movie_topics":movie_topics,
-		"movie_reviews":movie_reviews,
+		"latest_movie_topics":latest_movie_topics,
+		"latest_movie_reviews":latest_movie_reviews,
 		"form":form
 		})
