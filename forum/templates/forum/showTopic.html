@@ -4,6 +4,9 @@ Topic : {{ topic.title }}
 <br>
 Topic content  : {{ topic.content }}
 <br>
+{% if topic.user == request.user %}
+	<a href="{% url 'deleteTopic' topic.id %}">Delete topic</a>
+{% endif %}
 Comments : 
 <ul>
 	{% for comment in topic_comments %}
