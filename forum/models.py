@@ -23,4 +23,4 @@ class TopicComment(models.Model):
 	updated_at = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return "#{} - {} - {}".format(self.topic.id,self.user,self.title)
+		return "#{} - {} - {}".format(self.topic.id,self.user,self.content)
