@@ -1,6 +1,15 @@
 
+
 <form method="POST">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit">Create review</button>
+ {% csrf_token %}
+	<p>
+		<label for="id_rating">Rating:</label>
+		<input type="number" min="1" max="100" name="rating" required id="id_rating" />
+	</p>
+	<p>
+		<label for="id_description">Description:</label>
+		<textarea name="description" class="materialize-textarea" cols="40" rows="10" required id="id_description">
+		</textarea>
+	</p>
+	<button type="submit" class="waves-effect waves-light btn-large pink m-t-20">Create review</button>
 </form>

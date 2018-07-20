@@ -1,10 +1,35 @@
-<a href="{% url 'showForum' movie.id %}">Forum</a> - <a href="{% url 'showMovie' movie.id %}">{{ movie.name }}</a>
-<br>
-<ul>
-	{% for topic in forum_topics %}
-		<li><a href="{% url 'showTopic' topic.id %}">{{topic}}</a></li>
-	{% empty %}
-		<li>No topics to show</li>
-	{% endfor %}
-	<a href="{% url 'createTopic' movie.id %}">Create topic</a>
-</ul>
+
+
+{% extends 'forum.html' %}
+
+{% block content %}
+		<div class="card">
+			<div class="card-image">
+				<img src="{{ movie.image.url }}">
+				<span class="card-title">{{ movie.name }}'s Forum</span>
+			</div>
+			<div class="card-content">
+				<a class="waves-effect waves-light btn-large purple" href="{% url 'createTopic' movie.id %}">Create A Topic</a>
+
+			</div>
+			</div>
+			
+			
+			{% for topic in forum_topics %}
+			<div class="card">
+				<div class="card-content black-text">
+					<div class="progress grey">
+						<div class="determinate cyan" style="width: {{ topic.rating }}%"></div>
+					</div>
+					<a href="{% url 'showTopic' topic.id %}"><h5>{{ topic.title}}</h5></a>
+					<p>{{ topic.content }}</p>
+				</div>
+				<div class="card-action">
+					{{ topic.created_at }}
+				</div>
+			</div>
+			{% empty %}
+			<li>No Topics to show</li>
+			{% endfor %}
+{% endblock content %}
+	

@@ -1,11 +1,20 @@
+{% extends 'forum.html' %}
 
-New comment :
-<form method="POST" action="{% url 'createComment' topic.id %}">
-	{% for error,message in form.errors.items %}
-		{{ error }}
-		{{ message }}
-	{% endfor %}
-	{% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit">Create comment</button>
-</form>
+{% block content %}
+<div class="card">
+	<div class="card-image">
+	</div>
+	<div class="card-content black-text">
+		<form method="POST" action="{% url 'createComment' topic.id %}">
+			{% for error,message in form.errors.items %} {{ error }} {{ message }} {% endfor %} {% csrf_token %}
+
+			<p>
+				<label for="id_content">Content:</label>
+				<textarea name="content" class="materialize-textarea" required id="id_content">
+				</textarea>
+			</p>
+			<button type="submit" class="waves-effect waves-light btn-large pink">Create comment</button>
+		</form>
+	</div>
+</div>
+{% endblock content %}
