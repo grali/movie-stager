@@ -1,0 +1,13 @@
+
+<form method="POST">
+	{% csrf_token %}
+	<p>
+		<label for="id_title">Title:</label>
+		 <input type="text" name="title" maxlength="150" id="id_title" value="{{topic.title}}" required />
+	</p>
+	<p>
+		<label for="id_content">Content:</label>
+		 <textarea name="content" cols="40" required id="id_content" rows="10">{{topic.content}}</textarea>
+	</p>	
+<button type="submit">Create topic</button>
+</form>

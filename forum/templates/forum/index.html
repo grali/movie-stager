@@ -1,0 +1,10 @@
+<a href="{% url 'showForum' topic.movie.id %}">Forum</a> - {{ movie.name }}
+<br>
+<ul>
+	{% for topic in forum_topics %}
+		<li><a href="{% url 'showTopic' topic.id %}">{{topic}}</a></li>
+	{% empty %}
+		<li>No topics to show</li>
+	{% endfor %}
+	<a href="{% url 'createTopic' movie.id %}">Create topic</a>
+</ul>
