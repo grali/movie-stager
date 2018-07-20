@@ -28,6 +28,21 @@ def createTopic(request,movie_id):
 		context = {"form":form}
 		return render(request,"forum/newTopic.html",context)
 
+def editTopic(request,topic_id):
+	topic = Topic.objects.get(pk=topic_id)
+	form = TopicForm()
+	context = {"form":form,"topic":topic}
+	if request.method == "POST":
+		form = TopicForm(request.POST,instance=topic)
+		if form.is_valid():
+			topic = form.save(commit=False)
+			topic.save()
+			return redirect(reverse("showTopic",args=(topic.id,)))
+		else:
+			return render(request,"forum/editTopic.html",context)
+	else:
+		return render(request,"forum/editTopic.html",context)
+
 def deleteTopic(request,topic_id):
 	topic = Topic.objects.get(pk=topic_id)
 	if topic.user == request.user:
