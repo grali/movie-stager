@@ -1,0 +1,12 @@
+Movie : {{ topic.movie.name }}
+<br>
+Topic : {{ topic.title }}
+<br>
+Comments : 
+<ul>
+	{% for comment in topic_comments %}
+		<li>{{comment}}</li>
+	{% empty %}
+		<li>No comments</li>
+	{% endfor %}
+</ul>
