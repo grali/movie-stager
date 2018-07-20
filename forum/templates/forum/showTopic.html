@@ -1,26 +1,69 @@
-<a href="{% url 'showForum' topic.movie.id %}">Forum</a> : {{ topic.movie.name }}
-<br>
-Topic : <a href="{% url 'showTopic' topic.id %}">{{ topic.title }}</a>
-<br>
-Topic content  : {{ topic.content }}
-<br>
-{% if topic.user == request.user %}
-	<a href="{% url 'deleteTopic' topic.id %}">Delete topic</a>
-	<a href="{% url 'editTopic' topic.id %}">Edit topic</a>
-{% endif %}
-Comments : 
-<ul>
-	{% for comment in topic_comments %}
-		<li>{{comment.content}}</li>
-	{% empty %}
-		<li>No comments</li>
-	{% endfor %}
-</ul>
+{% extends 'forum.html' %}
 
-New comment :
-<form method="POST" action="{% url 'createComment' topic.id %}">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit">Create comment</button>
-</form>
 
+
+
+{% block content %}
+		<div class="card">
+			<div class="card-image">
+				<img src="http://source.unsplash.com/random/600x500">
+				<a href="{% url 'showForum' topic.movie.id %}"><span class="card-title">{{ topic.movie.name }}'s Forum</span></a>
+			</div>
+			<div class="card-content">
+				<a href="{% url 'showTopic' topic.id %}"><h5>{{ topic.title }}</h5></a>
+				<p>{{ topic.content }}</p>
+				<br><br>
+			{% if topic.user == request.user %}
+				<a href="{% url 'deleteTopic' topic.id %}" class="waves-effect waves-light btn-large red">Delete topic</a>
+				<a href="{% url 'editTopic' topic.id %}" class="waves-effect waves-light btn-large pink darken-3">Edit topic</a>
+			{% endif %}
+
+			</div>
+		</div>
+			
+			
+			{% for comment in topic_comments %}
+			<div class="card">
+				<div class="card-content black-text">
+					<h5>
+					{{ comment.user }} said:
+					</h5>
+					<p>{{ comment.content }}</p>
+				</div>
+				<div class="card-action">
+					{{ comment.created_at }}
+				</div>
+			</div>
+
+			{% empty %}
+
+<div class="card">
+	<div class="card-content center-text black-text">
+		<h5> No Comments To Show :(</h5>
+	</div>
+</div>
+			{% endfor %}
+			<div class="card">
+			<div class="card-content black-text">
+				<h5> New comment :</h5>
+			</div>
+			</div>
+
+			<div class="card">
+				<div class="card-image">
+			</div>
+				<div class="card-content black-text">
+			<form method="POST" action="{% url 'createComment' topic.id %}">
+				{% csrf_token %} 
+				
+				<p>
+					<label for="id_content">Content:</label>
+					<textarea name="content" class="materialize-textarea" required id="id_content">
+					</textarea>
+				</p>
+				<button type="submit" class="waves-effect waves-light btn-large pink">Create comment</button>
+			</form>
+				</div>
+			</div>
+{% endblock content %}
+	

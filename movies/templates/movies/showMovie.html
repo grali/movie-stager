@@ -12,9 +12,10 @@
 			</div>
 			<div class="card-action">
 				<p>Release Date: {{ movie.created_at.year }}</p>
-			<div class="progress">
-				<div class="determinate pink" style="width: {{ movie.rating }}%"></div>
+			<div class="progress grey">
+				<div class="determinate pink" style="width: {{ movie_rating }}%"></div>
 			</div>
+			Movie Rating: {{ movie_rating }}/100
 			</div>
 		</div>
 {% endblock content %}
@@ -48,14 +49,29 @@
 
 
 {% block right %}
-<ul>
-	<a href="{% url 'showForum' movie.id %}">Forum</a>: 
-	{% for topic in latest_movie_topics %}
-	<li>{{ topic.description}} {{ topic.rating }} {{ topic.created_at }}</li>
-	{% empty %}
-	<li>No topics to show</li>
-	{% endfor %}
-</ul>
+	<div class="card ">
+		<div class="card-content black-text">
+			<a href="{% url 'showForum' movie.id %}" class="waves-effect cyan waves-light btn-large" style="width: 100%;">Forum of this movie</a>
+
+		</div>
+	</div>
+
+ {% for topic in latest_movie_topics %}
+<div class="card">
+	<div class="card-content black-text">
+				<div class="progress grey">
+					<div class="determinate cyan" style="width: {{ topic.rating }}%"></div>
+				</div>
+		<a href="{% url 'showTopic' topic.id %}"><h5>{{ topic.title}}</h5></a>
+		<p>{{ topic.content }}</p>
+	</div>
+	<div class="card-action">
+		{{ topic.created_at }}
+	</div>
+</div>
+{% empty %}
+<li>No Topics to show</li>
+{% endfor %}
 
 {% endblock right %}
 	
