@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,reverse
 from movies.models import Movie
 from .models import Topic,TopicComment
 from .forms import TopicForm,TopicCommentForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request,movie_id):
@@ -10,6 +11,7 @@ def index(request,movie_id):
 	context = {"movie":movie,"forum_topics":forum_topics}
 	return render(request,"forum/index.html",context)
 
+@login_required
 def createTopic(request,movie_id):
 	movie = Movie.objects.get(pk=movie_id)
 	form = TopicForm()
@@ -28,6 +30,7 @@ def createTopic(request,movie_id):
 		context = {"form":form}
 		return render(request,"forum/newTopic.html",context)
 
+@login_required
 def editTopic(request,topic_id):
 	topic = Topic.objects.get(pk=topic_id)
 	form = TopicForm()
@@ -43,12 +46,14 @@ def editTopic(request,topic_id):
 	else:
 		return render(request,"forum/editTopic.html",context)
 
+@login_required
 def deleteTopic(request,topic_id):
 	topic = Topic.objects.get(pk=topic_id)
 	if topic.user == request.user:
 		topic.delete()
 	return redirect(reverse("showForum",args=(topic.movie.id,)))
 
+@login_required
 def createTopicComment(request,topic_id):
 	topic = Topic.objects.get(pk=topic_id)
 	form = TopicCommentForm()

@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,reverse
 from .models import Movie,Review
 from forum.models import Topic
 from .forms import ReviewForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -18,6 +19,7 @@ def getRating(reviews):
 		print(reviewRating)
 	return reviewRating / len(reviews)
 
+@login_required
 def createReview(request,movie_id):
 	movie = Movie.objects.get(pk=movie_id)
 	form = ReviewForm()
