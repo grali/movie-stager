@@ -2,7 +2,7 @@ Forum - {{ movie.name }}
 <br>
 <ul>
 	{% for topic in forum_topics %}
-		<li>{{topic}}</li>
+		<li><a href="{% url 'showTopic' topic.id %}">{{topic}}</a></li>
 	{% empty %}
 		<li>No topics to show</li>
 	{% endfor %}
