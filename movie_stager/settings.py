@@ -1,4 +1,5 @@
 import os
+from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -10,7 +11,13 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+LOGIN_URL = reverse_lazy("login")
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
+
+
 INSTALLED_APPS = [
+    'authentication',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
