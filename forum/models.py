@@ -18,7 +18,6 @@ class Topic(models.Model):
 class TopicComment(models.Model):
 	topic = models.ForeignKey(Topic,on_delete=models.CASCADE)
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	title = models.CharField(max_length=150)
 	content = models.TextField()
 	created_at = models.DateTimeField(auto_now=True)
 	updated_at = models.DateTimeField(auto_now_add=True)
