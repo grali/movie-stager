@@ -11,6 +11,13 @@ def index(request):
         "movies" : movies
     })
 
+def getRating(reviews):
+	reviewRating = 0
+	for review in reviews:
+		reviewRating += review.rating
+		print(reviewRating)
+	return reviewRating / len(reviews)
+
 def createReview(request,movie_id):
 	movie = Movie.objects.get(pk=movie_id)
 	form = ReviewForm()
@@ -36,6 +43,7 @@ def showMovie(request,movie_id):
 		createReview(request,movie_id)
 	movie_topics = Topic.objects.filter(movie=movie)
 	movie_reviews = Review.objects.filter(movie=movie)
+	movie_rating = getRating(movie_reviews)
 	if len(movie_reviews) > 3:
 		latest_movie_reviews = movie_reviews[:3]
 	else:
@@ -49,5 +57,6 @@ def showMovie(request,movie_id):
 		"movie":movie,
 		"latest_movie_topics":latest_movie_topics,
 		"latest_movie_reviews":latest_movie_reviews,
-		"form":form
+		"form":form,
+		"movie_rating":movie_rating
 		})
