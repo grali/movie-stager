@@ -5,8 +5,15 @@ Topic : {{ topic.title }}
 Comments : 
 <ul>
 	{% for comment in topic_comments %}
-		<li>{{comment}}</li>
+		<li>{{comment.content}}</li>
 	{% empty %}
 		<li>No comments</li>
 	{% endfor %}
 </ul>
+
+New comment :
+<form method="POST" action="{% url 'createComment' topic.id %}">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Create comment</button>
+</form>
