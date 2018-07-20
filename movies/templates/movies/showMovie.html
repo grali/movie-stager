@@ -1,0 +1,27 @@
+Movie : {{ movie.name }}
+<br>
+Movie desc : {{ movie.description }}
+<br>
+Movie year : {{ movie.created_at.year }}
+<br>
+Movie rating: {{ movie_rating }}
+<br>
+<ul>Latest reviews:
+	{% for review in latest_movie_reviews %}
+		<li>{{ review.description}}
+		{{ review.rating }}
+		{{ review.created_at }}</li>
+	{% empty %}
+		<li>No reviews to show</li>
+	{% endfor %}
+	{% include "reviews/newReview.html" %}
+</ul>
+<ul><a href="{% url 'showForum' movie.id %}">Forum</a>:
+	{% for topic in latest_movie_topics %}
+		<li>{{ topic.description}}
+		{{ topic.rating }}
+		{{ topic.created_at }}</li>
+	{% empty %}
+		<li>No topics to show</li>
+	{% endfor %}
+</ul>
