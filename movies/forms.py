@@ -7,7 +7,7 @@ class MovieForm(forms.ModelForm):
     class Meta:
         model = Movie
         fields = [
-            "name"
+            "name",
             "description"
         ]
 
@@ -16,6 +16,6 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = [
-            "rating"
+            "rating",
             "description"
         ]
