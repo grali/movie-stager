@@ -1,0 +1,11 @@
+
+New comment :
+<form method="POST" action="{% url 'createComment' topic.id %}">
+	{% for error,message in form.errors.items %}
+		{{ error }}
+		{{ message }}
+	{% endfor %}
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Create comment</button>
+</form>

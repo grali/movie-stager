@@ -1,0 +1,25 @@
+<a href="{% url 'showForum' topic.movie.id %}">Forum</a> : {{ topic.movie.name }}
+<br>
+Topic : <a href="{% url 'showTopic' topic.id %}">{{ topic.title }}</a>
+<br>
+Topic content  : {{ topic.content }}
+<br>
+{% if topic.user == request.user %}
+	<a href="{% url 'deleteTopic' topic.id %}">Delete topic</a>
+	<a href="{% url 'editTopic' topic.id %}">Edit topic</a>
+{% endif %}
+Comments : 
+<ul>
+	{% for comment in topic_comments %}
+		<li>{{comment.content}}</li>
+	{% empty %}
+		<li>No comments</li>
+	{% endfor %}
+</ul>
+
+New comment :
+<form method="POST" action="{% url 'createComment' topic.id %}">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Create comment</button>
+</form>
