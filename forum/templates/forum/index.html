@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 
 
 {% extends 'base.html' %}
@@ -28,15 +26,3 @@
 
 {% endblock content %}
 	
-=======
-<a href="{% url 'showForum' movie.id %}">Forum</a> - <a href="{% url 'showMovie' movie.id %}">{{ movie.name }}</a>
-<br>
-<ul>
-	{% for topic in forum_topics %}
-		<li><a href="{% url 'showTopic' topic.id %}">{{topic}}</a></li>
-	{% empty %}
-		<li>No topics to show</li>
-	{% endfor %}
-	<a href="{% url 'createTopic' movie.id %}">Create topic</a>
-</ul>
->>>>>>> 589b4ade64b2070fbe8e573739e0b57fdd7f67a4
