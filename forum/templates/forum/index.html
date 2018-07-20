@@ -1,0 +1,9 @@
+Forum - {{ movie.name }}
+<br>
+<ul>
+	{% for topic in forum_topics %}
+		<li>{{topic}}</li>
+	{% empty %}
+		<li>No topics to show</li>
+	{% endfor %}
+</ul>
