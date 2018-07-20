@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,reverse
 from movies.models import Movie
-from .models import Topic
+from .models import Topic,TopicComment
 from .forms import TopicForm
 # Create your views here.
 
@@ -27,3 +27,9 @@ def createTopic(request,movie_id):
 	else:
 		context = {"form":form}
 		return render(request,"forum/newTopic.html",context)
+
+def showTopic(request,topic_id):
+	topic = Topic.objects.get(pk=topic_id)
+	topic_comments = TopicComment.objects.filter(topic=topic)
+	context = {"topic":topic,"topic_comments":topic_comments}
+	return render(request,"forum/showTopic.html",context)
