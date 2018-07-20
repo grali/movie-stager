@@ -1,7 +1,33 @@
-{% extends 'base.html' %}
+{% extends 'movie.html' %}
 
 
 {% block content %}
+ 
+<div class="row">
+    {% for movie in movies %}
+     <div class="col s12 m6 l3">
+           <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ movie.image.url }}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{ movie.name }}<i class="material-icons right">more_vert</i></span>
+                    <p><a href="{% url "showMovie" movie.id %}">Add a Review</a></p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{ movie.name }}<i class="material-icons right">close</i></span>
+                    <p>{{ movie.description }}</p>
+                </div>
+            </div>
+
+     </div>
+
+     
+     {% empty %}
+    </div>
+     <p>Sorry No Movies Were found! :(</p>
+    {% endfor %}
+     
 
 {% endblock content %}
     

@@ -1,27 +1,61 @@
-Movie : {{ movie.name }}
-<br>
-Movie desc : {{ movie.description }}
-<br>
-Movie year : {{ movie.created_at.year }}
-<br>
-Movie rating: {{ movie_rating }}
-<br>
-<ul>Latest reviews:
+{% extends 'base.html' %}
+
+
+{% block content %}
+		<div class="card">
+			<div class="card-image">
+				<img src="{{ movie.image.url }}">
+				<span class="card-title">{{ movie.name }}</span>
+			</div>
+			<div class="card-content">
+				<p>{{ movie.description }}</p>
+			</div>
+			<div class="card-action">
+				<p>Release Date: {{ movie.created_at.year }}</p>
+			<div class="progress">
+				<div class="determinate pink" style="width: {{ movie.rating }}%"></div>
+			</div>
+			</div>
+		</div>
+{% endblock content %}
+
+
+{% block left %}
+	<div class="card ">
+		<div class="card-content black-text">
+			<span class="card-title">Write A Review! 🤩 🙂 😡</span>
+			{% include "reviews/newReview.html" %}
+
+		</div>
+	</div>
 	{% for review in latest_movie_reviews %}
-		<li>{{ review.description}}
-		{{ review.rating }}
-		{{ review.created_at }}</li>
+	<div class="card">
+		<div class="card-content black-text">
+			<div class="progress">
+				<div class="determinate" style="width: {{ review.rating }}%"></div>
+			</div>
+			<p>{{ review.description}}</p>
+		</div>
+		<div class="card-action">
+			{{ review.created_at }}
+		</div>
+	</div>
 	{% empty %}
-		<li>No reviews to show</li>
+	<li>No reviews to show</li>
 	{% endfor %}
-	{% include "reviews/newReview.html" %}
-</ul>
-<ul><a href="{% url 'showForum' movie.id %}">Forum</a>:
+{% endblock left %}
+	
+
+
+{% block right %}
+<ul>
+	<a href="{% url 'showForum' movie.id %}">Forum</a>: 
 	{% for topic in latest_movie_topics %}
-		<li>{{ topic.description}}
-		{{ topic.rating }}
-		{{ topic.created_at }}</li>
+	<li>{{ topic.description}} {{ topic.rating }} {{ topic.created_at }}</li>
 	{% empty %}
-		<li>No topics to show</li>
+	<li>No topics to show</li>
 	{% endfor %}
 </ul>
+
+{% endblock right %}
+	

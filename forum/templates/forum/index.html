@@ -9,7 +9,7 @@
 				<span class="card-title">Login</span>
 			</div>
 			<div class="card-content">
-					<a href="{% url 'showForum' topic.movie.id %}">Forum</a> - {{ movie.name }}
+					Forum of: {{ movie.name }}
 					<br>
 					<ul>
 						{% for topic in forum_topics %}
