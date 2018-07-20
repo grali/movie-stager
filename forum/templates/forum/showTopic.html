@@ -1,6 +1,6 @@
-Movie : {{ topic.movie.name }}
+<a href="{% url 'showForum' topic.movie.id %}">Forum</a> : {{ topic.movie.name }}
 <br>
-Topic : {{ topic.title }}
+Topic : <a href="{% url 'showTopic' topic.id %}">{{ topic.title }}</a>
 <br>
 Topic content  : {{ topic.content }}
 <br>

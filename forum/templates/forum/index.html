@@ -1,4 +1,4 @@
-Forum - {{ movie.name }}
+<a href="{% url 'showForum' topic.movie.id %}">Forum</a> - {{ movie.name }}
 <br>
 <ul>
 	{% for topic in forum_topics %}
