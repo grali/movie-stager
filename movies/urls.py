@@ -1,7 +1,7 @@
-app_name="movies"
-from django.contrib import admin
 from django.urls import path, include
 from . import views
+
 urlpatterns = [
-    path('', views.index, name="homeview"),
+    path('', views.index, name="movieView"),
+    path('<movie_id>',views.showMovie,name="showMovie"),
 ]
