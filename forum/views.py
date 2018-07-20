@@ -28,6 +28,12 @@ def createTopic(request,movie_id):
 		context = {"form":form}
 		return render(request,"forum/newTopic.html",context)
 
+def deleteTopic(request,topic_id):
+	topic = Topic.objects.get(pk=topic_id)
+	if topic.user == request.user:
+		topic.delete()
+	return redirect(reverse("showForum",args=(topic.movie.id,)))
+
 def createTopicComment(request,topic_id):
 	topic = Topic.objects.get(pk=topic_id)
 	form = TopicCommentForm()
